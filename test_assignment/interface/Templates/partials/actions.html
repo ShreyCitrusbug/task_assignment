@@ -1,0 +1,18 @@
+{% load static %}
+<div class="row">
+        <div class="col-lg-2">
+            <a href="{% url 'product:product-detail' product.id %}" class="btn btn-xs btn btn-sm btn-sm" title="View">
+                <i class="fa fa-eye" style="color: #0dba10;"></i>
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="{% url 'product:product-update' product.id %}" class="btn btn-xs btn btn-sm btn-sm" title="Edit">
+                <i class="fa fa-edit"></i>
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="javascript:;" class="delete-product btn btn-xs btn-sm" title="Delete" data-pk="{{product.id}}" data-name="{{product.name}}">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+</div>
