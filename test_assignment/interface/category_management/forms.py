@@ -1,5 +1,7 @@
 from typing import Any
+
 from django import forms
+
 from test_assignment.domain.product_management.models import Category
 
 

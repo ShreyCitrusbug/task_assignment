@@ -2,7 +2,9 @@ from typing import Type
 
 from django.db.models.manager import BaseManager
 
-from test_assignment.domain.product_management.models import Product, Category, CategoryFactory, ProductFactory, ProductImages, ProductImagesFactory
+from test_assignment.domain.product_management.models import (
+    Category, CategoryFactory, Product, ProductFactory, ProductImages,
+    ProductImagesFactory)
 
 
 class CategoryService:

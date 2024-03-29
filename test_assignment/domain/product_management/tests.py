@@ -4,9 +4,15 @@ import tempfile
 from django.forms import ValidationError
 from django.test import TestCase
 from faker import Faker
-from test_assignment.domain.product_management.models import Product, Category, ProductImages
-from test_assignment.domain.product_management.services import ProductImagesService, ProductService, CategoryService
-from utils.test_helper_data.test_helper import ProductCreateTestHelper, ProductImagesCreateTestHelper, CategoryCreateTestHelper
+
+from test_assignment.domain.product_management.models import (Category,
+                                                              Product,
+                                                              ProductImages)
+from test_assignment.domain.product_management.services import (
+    CategoryService, ProductImagesService, ProductService)
+from utils.test_helper_data.test_helper import (CategoryCreateTestHelper,
+                                                ProductCreateTestHelper,
+                                                ProductImagesCreateTestHelper)
 
 fake = Faker()
 

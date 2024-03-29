@@ -1,7 +1,10 @@
 from typing import Any
+
 from django import forms
+
+from test_assignment.application.product__management.services import \
+    ProductImagesAppServices
 from test_assignment.domain.product_management.models import Product
-from test_assignment.application.product__management.services import ProductImagesAppServices
 
 
 class CreateProductForm(forms.ModelForm):

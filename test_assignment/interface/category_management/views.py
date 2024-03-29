@@ -1,12 +1,17 @@
 import logging
-from django.http.response import HttpResponse as HttpResponse
-from django.views.generic import CreateView, ListView, UpdateView, View, DetailView
-from test_assignment.domain.product_management.models import Category
-from test_assignment.application.product__management.services import CategoryAppServices
-from test_assignment.interface.category_management.forms import CreateCategoryForm, UpdateCategoryForm
+
 from django.contrib import messages
-from django.urls import reverse
+from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import HttpResponseRedirect
+from django.urls import reverse
+from django.views.generic import (CreateView, DetailView, ListView, UpdateView,
+                                  View)
+
+from test_assignment.application.product__management.services import \
+    CategoryAppServices
+from test_assignment.domain.product_management.models import Category
+from test_assignment.interface.category_management.forms import (
+    CreateCategoryForm, UpdateCategoryForm)
 
 logger = logging.getLogger("django")
 

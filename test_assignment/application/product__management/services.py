@@ -1,6 +1,10 @@
-from test_assignment.domain.product_management.models import Category, Product, ProductImages
-from test_assignment.domain.product_management.services import CategoryService, ProductService, ProductImagesService
 from django.db.models.query import QuerySet
+
+from test_assignment.domain.product_management.models import (Category,
+                                                              Product,
+                                                              ProductImages)
+from test_assignment.domain.product_management.services import (
+    CategoryService, ProductImagesService, ProductService)
 
 
 class CategoryAppServices:

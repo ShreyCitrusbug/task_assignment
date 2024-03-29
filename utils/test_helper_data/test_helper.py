@@ -1,7 +1,11 @@
 import random
 import tempfile
+
 from faker import Faker
-from test_assignment.domain.product_management.services import CategoryService, ProductImagesService, ProductService
+
+from test_assignment.domain.product_management.services import (
+    CategoryService, ProductImagesService, ProductService)
+
 fake = Faker()
 
 

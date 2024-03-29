@@ -1,9 +1,10 @@
 import logging
 import uuid
 from dataclasses import dataclass
-from utils.django.custom_models import ActivityTracking
+
 from django.db import models
 
+from utils.django.custom_models import ActivityTracking
 
 logger = logging.getLogger("django")
 
