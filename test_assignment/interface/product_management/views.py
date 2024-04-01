@@ -153,3 +153,12 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
     context_object_name = 'product'
+    product_images_app_services = ProductImagesAppServices()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(
+            *args, **kwargs)
+        context['product_images'] = self.product_images_app_services.filter_product_images_by_product_id(
+            product_id=self.object.id
+        )
+        return context
