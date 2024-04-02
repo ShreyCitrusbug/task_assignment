@@ -105,24 +105,6 @@ class ProductUpdateView(UpdateView):
             messages.error(self.request, "Product not found")
             return HttpResponseRedirect(reverse("product:product_list"))
 
-    def post(self, request: HttpRequest, pk, *args, **kwargs) -> HttpResponse:
-        product = self.product_app_services.get_product_by_id(product_id=pk)
-        product_form = self.form_class(request.POST, instance=product)
-        product_images = request.FILES.getlist("images")
-        if product_form.is_valid():
-            product_form.save()
-            product_images_list = []
-            for product_image in product_images:
-                product_images_list.append({
-                    'image': product_image,
-                    "product_id": product_form.instance.id
-                })
-            self.product_images_app_services.bulk_create_product_images(
-                data=product_images_list
-            )
-            logger.info("Product images crated.")
-        return super().post(request, *args, **kwargs)
-
 
 class ProductDeleteView(View):
     """

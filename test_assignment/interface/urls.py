@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("test_assignment.interface.product_management.urls")),
     path("", include("test_assignment.interface.category_management.urls")),
+    path("", include("test_assignment.interface.product_image_management.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

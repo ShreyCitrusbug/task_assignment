@@ -49,6 +49,10 @@ li{
 .product-image{
       object-fit: contain;
     object-position: center;
-    height: 100%;
+    height: 80%;
     width: 100%;
+}
+.edit-icon:hover,
+.delete-icon:hover {
+    cursor: pointer;
 }

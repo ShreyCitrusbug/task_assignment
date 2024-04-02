@@ -114,4 +114,53 @@ $(document).ready(function () {
             event.preventDefault();
         }
     })
+
+    //Validate image create form
+    $("#editImages").on("click", function (event) {
+        event.preventDefault()
+        let isFormValid = true
+        let productImage = $("#productImage").val();
+        let uuid = $(this).data("pk").split("/").pop();
+        let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+        if (!(validateField(productImage, "#image-error-text", "Image"))) {
+            isFormValid = false
+            event.preventDefault()
+        }
+        if (productImage) {
+            let extension = productImage.split(".").pop().toLowerCase();
+            if (
+                extension !== "jpg" &&
+                extension !== "jpeg" &&
+                extension !== "png" &&
+                extension !== "svg"
+            ) {
+                isFormValid = false
+                event.preventDefault();
+                $("#image-error-text").html(
+                    "Please upload valid image type .jpg .jpeg .png or .svg."
+                );
+            }
+        }
+        if (isFormValid) {
+            let formData = new FormData($('#productImagesForm')[0])
+            formData.append("pk", uuid)
+            formData.append("csrfmiddlewaretoken", csrfToken);
+            $.ajax({
+                method: "POST",
+                enctype: "multipart/form-data",
+                url: `/product/image/update/${uuid}`,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.status) {
+                        window.location.reload(true)
+                    }
+                },
+                error: function (error) {
+                    window.location.reload(true)
+                }
+            })
+        }
+    })
 })

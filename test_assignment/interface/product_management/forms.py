@@ -65,16 +65,10 @@ class UpdateProductForm(forms.ModelForm):
     """
     Django form class for Product data table.
     """
-    images = forms.FileField(widget=forms.TextInput(attrs={
-        "name": "images",
-        "type": "file",
-        "multiple": "True",
-    }))
-
     class Meta:
         model = Product
         fields = ['name', 'description', 'price',
-                  'sell_price', 'category', 'images']
+                  'sell_price', 'category']
         widgets = {
             "name": forms.TextInput(
                 attrs={"placeholder": "Name", "max_length": "250"}
@@ -119,10 +113,3 @@ class UpdateProductForm(forms.ModelForm):
             if sell_price > price:
                 self.add_error(
                     "sell_price", "*Sell price should less than price")
-
-    def save(self, commit=True):
-        product = super(UpdateProductForm, self).save(commit=False)
-        if commit:
-            if "images" in self.changed_data:
-                pass
-        return product

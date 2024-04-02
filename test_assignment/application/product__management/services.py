@@ -143,14 +143,8 @@ class ProductImagesAppServices:
         """
         return self.product_images_service.get_product_images_repo().filter(product_id=product_id)
 
-    def bulk_update_product_images(self, data: dict):
+    def get_product_image_by_id(self, product_image_id: str) -> ProductImages:
         """
-        Method to update product images object from factory class.
-        Args :
-            - Takes data as form of dict as an argument.
+        Method to get product images by uuid.
         """
-        bulk_updated_product_images = self.product_images_service.get_product_images_repo().bulk_update(
-            [self.product_images_service.product_images_factory(
-            ).build_entity_with_id(**product_images_data) for product_images_data in data]
-        )
-        return bulk_updated_product_images
+        return self.product_images_service.get_product_images_repo().get(id=product_image_id)
