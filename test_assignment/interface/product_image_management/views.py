@@ -56,7 +56,7 @@ class ProductImageDeleteView(DeleteView):
     model = ProductImages
     product_images_app_services = ProductImagesAppServices()
 
-    def get(self, request, pk):
+    def get(self, request, pk, *args, **kwargs):
         try:
             product_image = self.product_images_app_services.get_product_image_by_id(
                 product_image_id=pk
@@ -65,9 +65,9 @@ class ProductImageDeleteView(DeleteView):
             logger.info("Product image deleted successfully")
             messages.success(
                 request, "Product image deleted successfully")
-            return HttpResponseRedirect(reverse("product:product_list"))
+            return HttpResponseRedirect(reverse("product:product-update", args=[product_image.product_id]))
         except ProductImages.DoesNotExist as image_not_found:
             logger.error("Error while delete product image %s",
                          image_not_found.args[0])
             messages.error(request, "Product image not found")
-            return HttpResponseRedirect(reverse("product:product_list"))
+            return HttpResponseRedirect(reverse("product:product-update", args=[product_image.product_id]))

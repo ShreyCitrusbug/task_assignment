@@ -67,25 +67,23 @@
                         <div class="col-12">
                             <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">Product Images*</label>
                             <div class="row">
-                                {% if images %}
-                                    {% for product_image in images %} 
-                                        <div class="col-4">
-                                            <div class="d-flex gap-2">
-                                                <span class="edit-icon mr-2 text-success" id="edit-{{product_image.id}}"><i class="fa fa-pencil" data-pk="{{product_image.id}}"></i></span>
-                                                <span class="delete-icon text-danger" id="delete-{{product_image.id}}"><i class="fa fa-trash" data-pk="{{product_image.id}}"></i></span>
-                                            </div>
-                                            <img class="product-image" src={% if product_image.image %}{{product_image.image.url}} {% endif %}>
-                                        </div>
-                                    {% endfor %}
-                                    {% else %}
-                                    <div class="mb-4 product-input">
-                                        <input type="file" multiple="true" name="images" id="images" accept="image/*">
-                                        <p class="mt-2"><strong>Note:</strong> Please select images on one time if you want to upload multiple images</p>
-                                        <span id="product-image-error-text" class="text-danger">
-                                            {{form.images.errors}}
-                                        </span>
+                            {% for product_image in images %} 
+                                <div class="col-4">
+                                    <div class="d-flex gap-2">
+                                        <span class="edit-icon mr-2 text-success" id="edit-{{product_image.id}}"><i class="fa fa-pencil" data-pk="{{product_image.id}}"></i></span>
+                                        <span class="delete-icon text-danger" id="delete-{{product_image.id}}"><i class="fa fa-trash" data-pk="{{product_image.id}}"></i></span>
                                     </div>
-                                {% endif %}
+                                    <img class="product-image" src={% if product_image.image %}{{product_image.image.url}} {% endif %}>
+                                </div>
+                            {% endfor %}
+                            <p><strong>Want to add more images?</strong></p>
+                            <div class="mb-4 product-input">
+                                <input type="file" multiple="true" name="images" id="images" accept="image/*">
+                                <p class="mt-2"><strong>Note:</strong> Please select images on one time if you want to upload multiple images</p>
+                                <span id="product-image-error-text" class="text-danger">
+                                    {{form.images.errors}}
+                                </span>
+                            </div>
                             </div>
                         </div>
                     </div>
