@@ -65,9 +65,9 @@
                         <div class="col-12"> 
                             <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">Product Images*</label>
                             <div class="mb-4 product-input">
-                                <input type="file" multiple="true" name="images">
+                                <input type="file" multiple="true" name="images" id="productImages" accept="image/*">
                                 <p class="mt-2"><strong>Note:</strong> Please select images on one time if you want to upload multiple images</p>
-                                <span id="description-error-text" class="text-danger">
+                                <span id="product-images-error-text" class="text-danger">
                                     {{form.images.errors}}
                                 </span>
                             </div>

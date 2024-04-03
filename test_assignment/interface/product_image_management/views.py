@@ -32,31 +32,21 @@ class ProductImagesUpdateView(View):
             product_image = self.product_images_app_services.get_product_image_by_id(
                 product_image_id=pk
             )
-            product_image_form = self.form_class(
-                request.POST, request.FILES, instance=product_image
-            )
-            if product_image_form.is_valid():
-                product_image_form.save()
+            if request.FILES.get("image"):
+                product_image.image = request.FILES.get(
+                    "image")
+                product_image.save()
                 logger.info("Product image updated successfully")
                 messages.success(
                     request, "Product image updated successfully")
-                return JsonResponse({'status': 'success'})
             else:
-                errors = product_image_form.errors
-                return JsonResponse({'status': 'error', 'errors': errors}, status=400)
+                messages.error(request, "Image not found")
+            return JsonResponse({'status': 'success', "url": f'/product/update/{product_image.product_id}'})
         except ProductImages.DoesNotExist as image_not_found:
             logger.error("Error while update product image %s",
                          image_not_found.args[0])
             messages.error(request, "Product image not found")
-            return JsonResponse({'status': 'error', 'message': 'Product image not found'}, status=404)
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            return super(ProductImagesUpdateView, self).dispatch(request, *args, **kwargs)
-        except Exception as e:
-            logger.error('Error while update product image %s', e.args[0])
-            messages.error(self.request, "Product image not found")
-            return HttpResponseRedirect(reverse("product:product_list"))
+            return JsonResponse({'status': 'error', 'url': f'/product/update/{product_image.product_id}'}, status=404)
 
 
 class ProductImageDeleteView(DeleteView):

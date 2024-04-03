@@ -14,6 +14,7 @@
     <body>
         <div class="container">
             <div class="my-4 px-3 py-2">
+                    {% include 'includes/messages.html' %}
                 <h3 class="mb-4">Add Product</h3>
                 <form method="POST" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
@@ -66,75 +67,86 @@
                         <div class="col-12">
                             <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">Product Images*</label>
                             <div class="row">
-                                {% for product_image in images %} 
-                                    <div class="col-4">
-                                        <div class="d-flex gap-2">
-                                            <span class="edit-icon mr-2 text-success" id="edit-{{product_image.id}}"><i class="fa fa-pencil" data-pk="{{product_image.id}}"></i></span>
-                                            <span class="delete-icon text-danger" id="delete-{{product_image.id}}"><i class="fa fa-trash" data-pk="{{product_image.id}}"></i></span>
-                                        </div>
-                                        <img class="product-image" src={% if product_image.image %}{{product_image.image.url}} {% endif %}>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="modal" id="editConfirmModal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title"></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border:0;background-color:transparent">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="POST" enctype="multipart/form-data" novalidate id="productImagesForm">
-                                            <div class="row gap-3">
-                                                <label>Image*</label>
-                                                <div class="product-input">
-                                                    <input type="file" id="productImage" name="image" accept="image/*" >
-                                                    <span id="image-error-text" class="text-danger"></span>
-                                                </div>
+                                {% if images %}
+                                    {% for product_image in images %} 
+                                        <div class="col-4">
+                                            <div class="d-flex gap-2">
+                                                <span class="edit-icon mr-2 text-success" id="edit-{{product_image.id}}"><i class="fa fa-pencil" data-pk="{{product_image.id}}"></i></span>
+                                                <span class="delete-icon text-danger" id="delete-{{product_image.id}}"><i class="fa fa-trash" data-pk="{{product_image.id}}"></i></span>
                                             </div>
-                                        </form>
+                                            <img class="product-image" src={% if product_image.image %}{{product_image.image.url}} {% endif %}>
+                                        </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="mb-4 product-input">
+                                        <input type="file" multiple="true" name="images" id="images" accept="image/*">
+                                        <p class="mt-2"><strong>Note:</strong> Please select images on one time if you want to upload multiple images</p>
+                                        <span id="product-image-error-text" class="text-danger">
+                                            {{form.images.errors}}
+                                        </span>
                                     </div>
-                                    <div class="modal-footer">
-                                        <ul class="modal_btns">
-                                            <li><a href="javascript:;" class="modal_btn cancel"
-                                                    data-dismiss="modal">no</a></li>
-                                            <li><button id="editImages" class="modal_btn" data-pk="">Yes</button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title"></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border:0;background-color:transparent">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to delete this image? </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <ul class="modal_btns">
-                                            <li><a href="javascript:;" class="modal_btn cancel"
-                                                    data-dismiss="modal">no</a></li>
-                                            <li><a href="" id="deleteImage" class="modal_btn">Yes</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="rw_save_btn d-flex align-items-center gap-3 justify-content-center flex-wrap mt-4">
-                <button type="submit" id="update-product-submit-btn" class="btn btn-success btn-lg">save</button>
-                <a href="{% url 'product:product_list' %}"><button type="button" class="btn btn-primary btn-lg">cancel</button></a>
-            </div> 
+                        <button type="submit" id="update-product-submit-btn" class="btn btn-success btn-lg">save</button>
+                        <a href="{% url 'product:product_list' %}"><button type="button" class="btn btn-primary btn-lg">cancel</button></a>
+                    </div> 
                 </form>
+                <div class="modal" id="editConfirmModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border:0;background-color:transparent">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="productImagesForm" method="POST" enctype="multipart/form-data"   novalidate>
+                                    {% csrf_token %}
+                                    <div class="row gap-3">
+                                        <label>Image*</label>
+                                        <div class="product-input">
+                                            <input type="file" id="productImage" name="image" accept="image/*" >
+                                            <span id="image-error-text" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <ul class="modal_btns">
+                                    <li><a href="javascript:;" class="modal_btn cancel"
+                                            data-dismiss="modal">no</a></li>
+                                    <li><button id="editImages" class="modal_btn" data-pk="">Yes</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="deleteConfirmModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border:0;background-color:transparent">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this image? </p>
+                            </div>
+                            <div class="modal-footer">
+                                <ul class="modal_btns">
+                                    <li><a href="javascript:;" class="modal_btn cancel"
+                                            data-dismiss="modal">no</a></li>
+                                    <li><a href="" id="deleteImage" class="modal_btn">Yes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

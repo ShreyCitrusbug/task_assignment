@@ -29,6 +29,7 @@ $(document).ready(function () {
         let sellPrice = $("#id_sell_price").val();
         let category = $("#id_category").val();
         let description = $("#id_description").val();
+        let images = $("#productImages")
 
         isValidPrice = true
         isValidSellPrice = true
@@ -53,11 +54,26 @@ $(document).ready(function () {
             isFormValid = false
             event.preventDefault();
         }
+        if (!(validateField(images.val(), "#product-images-error-text", "Image"))) {
+            isFormValid = false
+            event.preventDefault();
+        }
         if (price && sellPrice && isValidPrice && isValidSellPrice) {
             if (sellPrice > price) {
                 isFormValid = false
                 event.preventDefault();
                 $("#sell-price-error-text").html("Sell price cannot be greater than price.");
+            }
+        }
+        if (images) {
+            let isValidImageType = Array.from(images).every(image => {
+                let imageType = image.files[0].name.split(".").pop().toLowerCase();
+                return imageType === 'jpeg' || imageType === 'jpg' || imageType === 'png';
+            });
+            if (!isValidImageType) {
+                isFormValid = false;
+                event.preventDefault();
+                $("#product-images-error-text").html("Invalid image type. Please upload images with only .jpg, .jpeg, or .png extensions.");
             }
         }
     })
@@ -68,6 +84,7 @@ $(document).ready(function () {
         let sellPrice = $("#id_sell_price").val();
         let category = $("#id_category").val();
         let description = $("#id_description").val();
+        let images = $("#images")
 
         isValidPrice = true
         isValidSellPrice = true
@@ -104,6 +121,17 @@ $(document).ready(function () {
             event.preventDefault();
             $("#name-error-text").html("Name cannot be greater than 250 characters.");
         }
+        if (images) {
+            let isValidImageType = Array.from(images).every(image => {
+                let imageType = image.files[0].name.split(".").pop().toLowerCase();
+                return imageType === 'jpeg' || imageType === 'jpg' || imageType === 'png';
+            });
+            if (!isValidImageType) {
+                isFormValid = false;
+                event.preventDefault();
+                $("#product-image-error-text").html("Invalid image type. Please upload images with only .jpg, .jpeg, or .png extensions.");
+            }
+        }
     })
 
     //create category form validation
@@ -122,6 +150,7 @@ $(document).ready(function () {
         let productImage = $("#productImage").val();
         let uuid = $(this).data("pk").split("/").pop();
         let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
         if (!(validateField(productImage, "#image-error-text", "Image"))) {
             isFormValid = false
             event.preventDefault()
@@ -142,9 +171,10 @@ $(document).ready(function () {
             }
         }
         if (isFormValid) {
-            let formData = new FormData($('#productImagesForm')[0])
-            formData.append("pk", uuid)
+            let formData = new FormData();
+            formData.append("pk", uuid);
             formData.append("csrfmiddlewaretoken", csrfToken);
+            formData.append("image", $("#productImage")[0].files[0]);
             $.ajax({
                 method: "POST",
                 enctype: "multipart/form-data",
@@ -154,11 +184,11 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (response) {
                     if (response.status) {
-                        window.location.reload(true)
+                        window.location.href = response.url
                     }
                 },
                 error: function (error) {
-                    window.location.reload(true)
+                    window.location.href = error.url
                 }
             })
         }

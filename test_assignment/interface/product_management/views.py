@@ -97,6 +97,25 @@ class ProductUpdateView(UpdateView):
         )
         return context
 
+    def post(self, request: HttpRequest, pk, *args, **kwargs) -> HttpResponse:
+        product = self.product_app_services.get_product_by_id(product_id=pk)
+        product_update_form = self.form_class(request.POST, instance=product)
+        product_images = request.FILES.getlist("images")
+        if product_update_form.is_valid():
+            product_update_form.save()
+            product_images_list = []
+            if product_images:
+                for product_image in product_images:
+                    product_images_list.append({
+                        'image': product_image,
+                        "product_id": product_update_form.instance.id
+                    })
+                self.product_images_app_services.bulk_create_product_images(
+                    data=product_images_list
+                )
+                logger.info("Product images crated.")
+        return super().post(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
         try:
             return super(ProductUpdateView, self).dispatch(request, *args, **kwargs)
