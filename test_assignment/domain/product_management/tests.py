@@ -128,7 +128,7 @@ class ProductModelTestCases(TestCase):
             price=random.randint(500, 700),
             sell_price=random.randint(300, 699),
             category=self.category.id,
-            images=tempfile.NamedTemporaryFile().name
+            quantity=random.randint(1, 1000)
         )
         product.save()
         self.assertTrue(isinstance(product, self.product_model))
@@ -144,7 +144,7 @@ class ProductModelTestCases(TestCase):
                 price=random.randint(500, 700),
                 sell_price=random.randint(300, 699),
                 category=self.category.id,
-                images=tempfile.NamedTemporaryFile().name
+                quantity=random.randint(1, 1000)
             )
             product.save()
 
@@ -171,7 +171,7 @@ class ProductImagesTestCases(TestCase):
         """
         product_images = self.product_images_service.product_images_factory().build_entity_with_id(
             image=tempfile.NamedTemporaryFile(suffix=".jpg").name,
-            product=self.product.id
+            product_id=self.product.id
         )
         product_images.save()
 
@@ -182,6 +182,6 @@ class ProductImagesTestCases(TestCase):
         with self.assertRaises(Exception):
             product_images = self.product_images_service.product_images_factory().build_entity_with_id(
                 image=tempfile.NamedTemporaryFile(suffix=".jpg").name,
-                product=""
+                product_id=""
             )
             product_images.save()

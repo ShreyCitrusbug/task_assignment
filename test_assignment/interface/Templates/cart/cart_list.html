@@ -30,21 +30,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="admin_user_select">
-                            <div class="search_icon_wrapper">
-                                <div class="rw_dashboard_btn">
-                                    <a href="{% url 'product:product-create' %}" class="rw_btn">
-                                        <button class="btn btn-primary">
-                                            +Add New Product
-                                        </button>
-                                    </a>                        
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="rw_table_wrapper mt-5">
                         <div class="rw_table_inner rw_admin_user_table rw_campaigns_table">
-                            <table id="productTable" class="table rw_pagination mt-5" >
+                            <table id="cartTable" class="table rw_pagination mt-5" >
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -56,15 +45,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for product in products %}
+                                    {% for cart_product in cart %}
                                         <tr>
-                                            <td>{{product.name}}</td>
-                                            <td id="product-price-{{product.id}}">{{product.price}}</td>
-                                            <td id="product-sell-price-{{product.id}}">{{product.sell_price}}</td>
-                                            <td id="product-category-{{product.id}}">{{product.category}}</td>
-                                            <td>{{product.created_at}}</td>
+                                            <td>{{cart_product.product.name}}</td>
+                                            <td>{{cart_product.product.price}}</td>
+                                            <td>{{cart_product.product.sell_price}}</td>
+                                            <td>{{cart_product.product.category}}</td>
+                                            <td>{{cart_product.product.created_at}}</td>
                                             <td>
-                                                {% include 'partials/actions.html' %}
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <a href="#" class="delete-cart-product btn btn-xs btn btn-sm btn-sm" title="View">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -72,7 +67,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="modal" id="delete_confirm_popup" tabindex="-1" role="dialog">
+                    <div class="modal" id="deleteCartProduct" tabindex="-1" role="dialog">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -94,27 +89,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal" id="addToCart" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title"></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border:0;background-color:transparent">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" id="product-content">
-                                </div>
-                                <div class="modal-footer">
-                                    <ul class="modal_btns">
-                                        <li><a href="javascript:;" class="modal_btn cancel"
-                                                data-dismiss="modal">no</a></li>
-                                        <li><a href="" id="addProductToCart" class="modal_btn cart">Add to Cart</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -124,6 +98,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'js/dataTable.js' %}"></script>
     <script src="{% static 'js/deleteModal.js' %}"></script>
-    <script src="{% static 'js/addToCartModal.js' %}"></script>
 </body>
 </html>

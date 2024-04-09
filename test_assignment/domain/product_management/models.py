@@ -1,3 +1,4 @@
+from decimal import Decimal
 import logging
 import uuid
 from dataclasses import dataclass
@@ -97,6 +98,8 @@ class Product(ActivityTracking):
         max_digits=10, decimal_places=2, null=False, blank=False)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=False, blank=False)
+    quantity = models.DecimalField(
+        max_digits=6, decimal_places=2, null=False, blank=False)
 
     def __str__(self) -> str:
         return self.name
@@ -120,6 +123,7 @@ class ProductFactory:
         price: float,
         sell_price: float,
         category: Category,
+        quantity: Decimal
     ) -> Product:
         """
         Creates runtime object of product model.
@@ -131,6 +135,7 @@ class ProductFactory:
             price=price,
             sell_price=sell_price,
             category=category,
+            quantity=quantity
         )
 
     @classmethod
@@ -141,6 +146,7 @@ class ProductFactory:
         price: float,
         sell_price: float,
         category: Category,
+        quantity: Decimal
     ) -> Product:
         """
         Creates runtime object of product model with auto assignment of uuid.
@@ -153,6 +159,7 @@ class ProductFactory:
             price=price,
             sell_price=sell_price,
             category=category,
+            quantity=quantity
         )
 
 

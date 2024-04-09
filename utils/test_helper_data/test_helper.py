@@ -5,6 +5,7 @@ from faker import Faker
 
 from test_assignment.domain.product_management.services import (
     CategoryService, ProductImagesService, ProductService)
+from test_assignment.domain.cart.services import CartService
 
 fake = Faker()
 
@@ -55,8 +56,8 @@ class ProductCreateTestHelper:
             description=fake.name(),
             price=random.randint(800, 1000),
             sell_price=random.randint(300, 799),
-            category=category.id,
-            images=tempfile.NamedTemporaryFile(suffix=".jpg").name
+            category=category,
+            quantity=100
         )
         product.save()
         return product
@@ -82,7 +83,33 @@ class ProductImagesCreateTestHelper:
         product = self.category_helper_class.create_category_data()
         product_images = self.product_images_service.product_images_factory().build_entity_with_id(
             image=tempfile.NamedTemporaryFile(suffix=".jpg").name,
-            product=product.id
+            product_id=product.id
         )
         product_images.save()
         return product_images
+
+
+class CartCreateTestHelper:
+    """
+    helper class for creating test data of cart model using Faker.
+    methods:
+        - init - constructor whenever CartCreateTestHelper class is called.
+        - create_cart_data - helper method to create test cart by calling model services.
+    """
+
+    def __init__(self):
+        self.cart_service = CartService()
+        self.product_helper_class = ProductCreateTestHelper()
+
+    def create_cart_data(self):
+        """
+        Helper method to create test cart by calling model services.
+        Returns cart object.
+        """
+        product = self.product_helper_class.create_product_data()
+        cart = self.cart_service.cart_factory().build_entity_with_id(
+            product=product,
+            quantity=random.randint(1, 99)
+        )
+        cart.save()
+        return cart

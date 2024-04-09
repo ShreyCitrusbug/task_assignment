@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "minio_storage",
     "storages",
     "test_assignment.domain.product_management",
-
+    "test_assignment.domain.cart",
 ]
 
 MIDDLEWARE = [

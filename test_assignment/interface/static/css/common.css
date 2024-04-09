@@ -56,3 +56,21 @@ li{
 .delete-icon:hover {
     cursor: pointer;
 }
+.modal_btns li .modal_btn.cart{
+      font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    width: 100%;
+    min-width: 150px;
+    max-width: 132px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(269.36deg, #149cea -23.62%, #91e9fb 120.63%);
+    color: #fff;
+    border-radius: 2px;
+}

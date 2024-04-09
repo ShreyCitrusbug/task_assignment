@@ -14,7 +14,7 @@ class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price',
-                  'sell_price', 'category']
+                  'sell_price', 'category', 'quantity']
         widgets = {
             "name": forms.TextInput(
                 attrs={"placeholder": "Name", "max_length": "250"}
@@ -24,6 +24,9 @@ class CreateProductForm(forms.ModelForm):
             ),
             "sell_price": forms.NumberInput(
                 attrs={"placeholder": "Sell Price"}
+            ),
+            "quantity": forms.NumberInput(
+                attrs={"placeholder": "Quantity"}
             ),
             "description": forms.Textarea(
                 attrs={"placeholder": "Description",
@@ -68,7 +71,7 @@ class UpdateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price',
-                  'sell_price', 'category']
+                  'sell_price', 'category', 'quantity']
         widgets = {
             "name": forms.TextInput(
                 attrs={"placeholder": "Name", "max_length": "250"}
@@ -78,6 +81,9 @@ class UpdateProductForm(forms.ModelForm):
             ),
             "sell_price": forms.NumberInput(
                 attrs={"placeholder": "Sell Price"}
+            ),
+            "quantity": forms.NumberInput(
+                attrs={"placeholder": "Quantity"}
             ),
             "description": forms.Textarea(
                 attrs={"placeholder": "Description",

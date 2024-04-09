@@ -53,6 +53,15 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="col-lg-6 col-md-6"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.quantity.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.quantity}}
+                                <span id="category-error-text" class="text-danger">
+                                    {{form.quantity.error}}
+                                </span>
+                            </div>
+                        </div>
                         <div class="col-12"> 
                             <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.description.label}}*</label>
                             <div class="mb-4 product-input">
