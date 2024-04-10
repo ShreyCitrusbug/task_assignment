@@ -9,18 +9,5 @@ $(document).ready(function () {
         $('#addToCart').modal('show');
         $("#product-content").append(`<div class="row"><div class="col-4"><h6>Price</h6>${productPrice}</div><div class="col-4"><h6>Sell Price</h6>${productSellPrice}</div><div class="col-4"><h6>Category</h6>${category}</div></div>`)
         $('#addProductToCart').attr("href", "/add/cart/" + productId)
-        $.ajax({
-            method: "GET",
-            enctype: "multipart/form-data",
-            url: `/add/cart/${productId}`,
-            success: function (response) {
-                if (response.status) {
-                    window.location.href = response.url
-                }
-            },
-            error: function (error) {
-                window.location.href = error.url
-            }
-        })
     })
 });

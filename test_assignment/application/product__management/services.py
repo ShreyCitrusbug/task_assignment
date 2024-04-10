@@ -148,3 +148,6 @@ class ProductImagesAppServices:
         Method to get product images by uuid.
         """
         return self.product_images_service.get_product_images_repo().get(id=product_image_id)
+
+    def filter_product_images_by_product_id_list(self, product_id_list: list) -> QuerySet[ProductImages]:
+        return self.product_images_service.get_product_images_repo().filter(product_id__in=product_id_list)

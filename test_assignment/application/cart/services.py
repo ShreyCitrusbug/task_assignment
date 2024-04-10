@@ -33,3 +33,9 @@ class CartAppServices:
             cart.save()
         except Product.DoesNotExist as product_not_found:
             raise product_not_found
+
+    def get_cart_by_id(self, cart_id: str) -> Cart:
+        """
+        Get cart by uuid. 
+        """
+        return self.cart_service.get_cart_repo().get(id=cart_id)

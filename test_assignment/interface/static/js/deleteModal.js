@@ -14,10 +14,10 @@ $(document).ready(function () {
         $('#delete_agency').attr("href", "/category/delete/" + categoryId)
     })
     $(`.delete-cart-product`).on('click', function () {
-        let categoryId = $(this).data('pk')
-        let category = $(this).data("name")
-        $(".modal-title").html(`Delete ${category} ?`)
-        $('#delete_confirm_popup').modal('show');
-        $('#delete_agency').attr("href", "/category/delete/" + categoryId)
+        let cartId = $(this).data('pk')
+        let name = $(this).data('name')
+        $(".modal-title").html(`Remove ${name} from cart ?`)
+        $('#deleteCartProduct').modal('show');
+        $('#removeProduct').attr("href", "/cart/delete/" + cartId)
     })
 });
