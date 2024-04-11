@@ -109,7 +109,7 @@ class CartCreateTestHelper:
         product = self.product_helper_class.create_product_data()
         cart = self.cart_service.cart_factory().build_entity_with_id(
             product=product,
-            quantity=random.randint(1, 99)
+            quantity=1
         )
         cart.save()
         return cart

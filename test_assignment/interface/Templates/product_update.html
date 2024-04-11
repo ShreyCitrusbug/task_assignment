@@ -15,7 +15,7 @@
         <div class="container">
             <div class="my-4 px-3 py-2">
                     {% include 'includes/messages.html' %}
-                <h3 class="mb-4">Add Product</h3>
+                <h3 class="mb-4">Edit Product</h3>
                 <form method="POST" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
                     <div class="row">
@@ -33,7 +33,7 @@
                             <div class="mb-4 product-input">
                                 {{form.price}}
                                 <span id="price-error-text" class="text-danger">
-                                    {{form.price.error}}
+                                    {{form.price.errors}}
                                 </span>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="mb-4 product-input">
                                 {{form.sell_price}}
                                 <span id="sell-price-error-text" class="text-danger">
-                                    {{form.sell_price.error}}
+                                    {{form.sell_price.errors}}
                                 </span>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="mb-4 product-input">
                                 {{form.category}}
                                 <span id="category-error-text" class="text-danger">
-                                    {{form.category.error}}
+                                    {{form.category.errors}}
                                 </span>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="mb-4 product-input">
                                 {{form.quantity}}
                                 <span id="category-error-text" class="text-danger">
-                                    {{form.quantity.error}}
+                                    {{form.quantity.errors}}
                                 </span>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <div class="mb-4 product-input">
                                 {{form.description}}
                                 <span id="description-error-text" class="text-danger">
-                                    {{form.name.errors}}
+                                    {{form.description.errors}}
                                 </span>
                             </div>
                         </div>

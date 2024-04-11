@@ -49,15 +49,25 @@ class CreateProductForm(forms.ModelForm):
         category = clean_data.get("category")
 
         if not name:
-            self.add_error("name", "*Name is required")
+            self._errors['name'] = self.error_class(
+                ["*Name is required"]
+            )
         if not description:
-            self.add_error("description", "*Description is required")
+            self._errors['description'] = self.error_class(
+                ["*Description is required"]
+            )
         if not price:
-            self.add_error("price", "*Price is required")
+            self._errors['price'] = self.error_class(
+                ["*Price is required"]
+            )
         if not sell_price:
-            self.add_error("sell_price", "*Sell Price is required")
+            self._errors['sell_price'] = self.error_class(
+                ["*Sell Price is required"]
+            )
         if not category:
-            self.add_error("category", "*Category is required")
+            self._errors['category'] = self.error_class(
+                ["*Category is required"]
+            )
         if (price and sell_price):
             if sell_price > price:
                 self.add_error(
@@ -106,15 +116,25 @@ class UpdateProductForm(forms.ModelForm):
         category = clean_data.get("category")
 
         if not name:
-            self.add_error("name", "*Name is required")
+            self._errors['name'] = self.error_class(
+                ["*Name is required"]
+            )
         if not description:
-            self.add_error("description", "*Description is required")
+            self._errors['description'] = self.error_class(
+                ["*Description is required"]
+            )
         if not price:
-            self.add_error("price", "*Price is required")
+            self._errors['price'] = self.error_class(
+                ["*Price is required"]
+            )
         if not sell_price:
-            self.add_error("sell_price", "*Sell Price is required")
+            self._errors['sell_price'] = self.error_class(
+                ["*Sell Price is required"]
+            )
         if not category:
-            self.add_error("category", "*Category is required")
+            self._errors['category'] = self.error_class(
+                ["*Category is required"]
+            )
         if (price and sell_price):
             if sell_price > price:
                 self.add_error(
