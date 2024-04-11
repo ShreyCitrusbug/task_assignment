@@ -98,6 +98,7 @@ class ProductAppServices:
             price=data.get("price"),
             sell_price=data.get("sell_price"),
             category=data.get("category"),
+            quantity=data.get("quantity"),
         )
         product.save()
         return product

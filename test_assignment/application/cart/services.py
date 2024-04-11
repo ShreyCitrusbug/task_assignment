@@ -31,6 +31,7 @@ class CartAppServices:
             cart = self.cart_service.cart_factory().build_entity_with_id(
                 product=product, quantity=1)
             cart.save()
+            return cart
         except Product.DoesNotExist as product_not_found:
             raise product_not_found
 

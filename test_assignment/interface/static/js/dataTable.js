@@ -43,7 +43,6 @@ $(document).ready(function () {
         columns: [
             { data: "name", name: "name" },
             { data: "price", name: "price" },
-            { data: "sell_price", name: "sell_price" },
             { data: "image", name: "product_image" },
             { data: "category", name: "category" },
             { data: "created_at", name: "created_at" },

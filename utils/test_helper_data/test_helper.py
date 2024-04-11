@@ -27,7 +27,7 @@ class CategoryCreateTestHelper:
         Returns category object.
         """
         category = self.category_service.category_factory().build_entity_with_id(
-            name=fake.name()
+            name="Test Category"
         )
         category.save()
         return category

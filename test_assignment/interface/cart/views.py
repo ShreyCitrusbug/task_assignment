@@ -34,7 +34,7 @@ class CartListView(ListView):
         product_ids = [obj.product.id for obj in self.object_list]
         context['product_image'] = self.product_images_app_services.filter_product_images_by_product_id_list(
             product_id_list=product_ids
-        )[:1]
+        ).first()
         return context
 
 
