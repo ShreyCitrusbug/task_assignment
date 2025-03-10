@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Add | Product</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href={% static 'css/common.css' %}>
+    </head>
+    <body>
+        <div class="container">
+            <div class="my-4 px-3 py-2">
+                <h3 class="mb-4">Add Product</h3>
+                <form method="POST" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.name.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.name}}
+                                <span id="name-error-text" class="text-danger">
+                                    {{form.name.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.price.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.price}}
+                                <span id="price-error-text" class="text-danger">
+                                    {{form.price.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.sell_price.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.sell_price}}
+                                <span id="sell-price-error-text" class="text-danger">
+                                    {{form.sell_price.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.category.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.category}}
+                                <span id="category-error-text" class="text-danger">
+                                    {{form.category.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.quantity.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.quantity}}
+                                <span id="category-error-text" class="text-danger">
+                                    {{form.quantity.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">{{form.description.label}}*</label>
+                            <div class="mb-4 product-input">
+                                {{form.description}}
+                                <span id="description-error-text" class="text-danger">
+                                    {{form.description.errors}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12"> 
+                            <label class="fs-5 lh-1.5 text-dark mb-2 text-capitalize">Product Images*</label>
+                            <div class="mb-4 product-input">
+                                <input type="file" multiple="true" name="images" id="productImages" accept="image/*">
+                                <p class="mt-2"><strong>Note:</strong> Please select images on one time if you want to upload multiple images</p>
+                                <span id="product-images-error-text" class="text-danger">
+                                    {{form.images.errors}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rw_save_btn d-flex align-items-center gap-3 justify-content-center flex-wrap">
+                <button type="submit" id="create-product-submit-btn" class="btn btn-success btn-lg">save</button>
+                <a href="{% url 'product:product_list' %}"><button type="button" class="btn btn-primary btn-lg">cancel</button></a>
+            </div> 
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src={% static 'js/validate.js' %}></script>
+</html>

@@ -1,0 +1,17 @@
+{% load static %}
+<div class="col-auto col-md-10 col-xl-10 px-sm-2 px-0 bg-dark">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li class="nav-item">
+                <a href="{% url 'category:category_list' %}" class="nav-link align-middle px-0" title="Categories">
+                    <img src="{% static 'images/category.svg' %}" style="width:50px"> <span class="ms-1 d-none d-sm-inline"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'product:product_list' %}" class="nav-link px-0 align-middle" title="Products">
+                    <img src="{% static 'images/product.svg' %}" style="width:50px"> <span class="ms-1 d-none d-sm-inline"></span></a>
+            </li>
+        </ul>
+        <hr>
+    </div>
+</div>

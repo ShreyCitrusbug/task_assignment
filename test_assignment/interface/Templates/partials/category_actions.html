@@ -1,0 +1,13 @@
+{% load static %}
+<div class="row">
+        <div class="col-lg-2">
+            <a href="{% url 'category:category-update' category.id %}" class="btn btn-xs btn btn-sm btn-sm" title="Edit">
+                <i class="fa fa-edit"></i>
+            </a>
+        </div>
+        <div class="col-lg-2">
+            <a href="javascript:;" class="delete-category btn btn-xs btn-sm" title="Delete" data-pk="{{category.id}}" data-name="{{category.name}}">
+                <i class="fa fa-trash"></i>
+            </a>
+        </div>
+</div>

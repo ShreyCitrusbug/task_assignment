@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Product Detail</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href={% static 'css/common.css' %}>
+    </head>
+    <body>
+        <div class="container">
+            <div class="my-4 px-3 py-2">
+                <div class="rw_dashboard_box_wrapper">
+                    <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{% url 'product:product_list' %}">Back</a></button>
+                    <div class="admin_header agency_header">
+                        <div class="dashboard_title">
+                            <h1>Detail for {{product.name}}</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2">Product Name:</label>
+                            <div class="mb-4 product-input">
+                                {{product.name}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2">Product Category:</label>
+                            <div class="mb-4 product-input">
+                                {{product.category}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2">Product Price:</label>
+                            <div class="mb-4 product-input">
+                                {{product.price}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2">Product Sell Price:</label>
+                            <div class="mb-4 product-input">
+                                {{product.sell_price}}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label class="fs-5 lh-1.5 text-dark mb-2">Product Date:</label>
+                            <div class="mb-4 product-input">
+                                {{product.created_at}}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                        <div class="row">
+                            {% for product_image in product_images %} 
+                                <div class="col-4">
+                                    <img class="product-image gap-2" src={{product_image.image.url}}>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
