@@ -46,11 +46,12 @@
                                 </thead>
                                 <tbody>
                                     {% for cart_product in cart %}
+                                    {{cart_product.product__created_at}}
                                         <tr>
                                             <td>{{cart_product.product.name}}</td>
                                             <td>{{cart_product.product.price}}</td>
                                             <td>{{cart_product.product.sell_price}}</td>
-                                            <td><img src="{{product_image.image.url}}" alt="product-img" class=" w-auto" style="height: 50px"/></td>
+                                            <td><img src="{{cart_product.product_image.url}}" alt="product-img" class=" w-auto" style="height: 50px"/></td>
                                             <td>{{cart_product.product.category}}</td>
                                             <td>{{cart_product.quantity}}</td>
                                             <td>{{cart_product.product.created_at}}</td>

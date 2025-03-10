@@ -27,15 +27,17 @@ class CartListView(ListView):
     product_images_app_services = ProductImagesAppServices()
 
     def get_queryset(self):
-        return self.cart_app_services.list_of_all_products_in_cart()
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CartListView, self).get_context_data(*args, **kwargs)
-        product_ids = [obj.product.id for obj in self.object_list]
-        context['product_image'] = self.product_images_app_services.filter_product_images_by_product_id_list(
+        object_list = self.cart_app_services.list_of_all_products_in_cart(
+        ).select_related('product').values("product", "quantity", "product__created_at")
+        product_ids = [obj.get("product") for obj in object_list]
+        print(object_list)
+        unique_product_images = self.product_images_app_services.filter_product_images_by_product_id_list(
             product_id_list=product_ids
-        ).first()
-        return context
+        ).distinct("product_id")
+        for object in object_list:
+            object["product_image"] = list(
+                filter(lambda product_image: str(product_image.product_id) == str(object.get("product")), unique_product_images))[0].image
+        return object_list
 
 
 class CreateCartView(View):
